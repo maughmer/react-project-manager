@@ -21,3 +21,8 @@ Run `npm i` to install project dependencies.
 
 I updated the vite config to run on port 4200, simply because I'm accustomed to using that port for running dev versions
 of Angular apps.
+
+## Other
+
+The current version of the app doesn't use forms, as I haven't yet reached that section of the React course. For the
+moment, I'm using refs to get data from what few fields there are in the app.
