@@ -1,5 +1,6 @@
 import { useImperativeHandle, useRef } from "react"
 import { createPortal } from "react-dom";
+import './Modal.css';
 
 export default function Modal({ ref, children, buttonName="OK" }) {
   const dialog = useRef();
