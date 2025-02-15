@@ -13,9 +13,9 @@ export default function Project({ project, onUpdate, onDelete }) {
   }
 
   function handleAddTask() {
-    const tsk = task.current?.value;
-    if (tsk && tsk.length > 0) {
-      project.tasks.unshift(tsk);
+    const enteredTask = task.current.value;
+    if (enteredTask.length > 0) {
+      project.tasks.unshift(enteredTask);
       onUpdate(project.tasks);
       task.current.value = '';
     }
