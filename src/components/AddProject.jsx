@@ -10,7 +10,7 @@ export default function AddProject({ onAdd, onSave }) {
 
   function handleSaveProject() {
     if (title.current && description.current && date.current) {
-      onSave(title.current.value, description.current.value, date.current.value);
+      onSave({title: title.current.value, description: description.current.value, date: date.current.value});
     } else {
       setWarning('Please enter a title, description, and due date.');
     }

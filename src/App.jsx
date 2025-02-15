@@ -15,9 +15,8 @@ export default function App() {
     setAddingProject(add);
   }
 
-  function handleSaveProject(title, description, date) {
-    const id = title.substring(0, 3) + Date.now().toString().slice(-5);
-    const newProject = { title, description, date, id, tasks: [] };
+  function handleSaveProject(projectData) {
+    const newProject = { ...projectData, id: Date.now(), tasks: [] };
     setProjects(current => [...current, newProject]);
     handleAddProject(false);
     setProject(newProject);
