@@ -55,7 +55,7 @@ export default function App() {
 
   return (
     <main>
-      <Projects onAdd={handleAddProject} onSelect={handleSelectProject} projects={projects} />
+      <Projects onAdd={handleAddProject} onSelect={handleSelectProject} projects={projects} selectedProject={project?.id} />
       {content}
     </main>
   )
