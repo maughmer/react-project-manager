@@ -1,0 +1,11 @@
+.article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3rem;
+  & p.subtitle {
+    color: #999;
+    margin-top: 0;
+    padding-bottom: 2rem;
+  }
+}

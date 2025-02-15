@@ -1,0 +1,55 @@
+.article {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  padding-top: 3rem;
+}
+
+.article hr {
+  width: 100%;
+  border: 1px solid #bbb;
+}
+
+.article section {
+  display: flex;
+  flex-direction: column;
+  & h2 {
+    margin: 0;
+  }
+  & h2.title {
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  & div.columns {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+  }
+  & div.addTask input {
+    width: 50%;
+  }
+  & .subtitle {
+    color: #999;
+    margin: 0;
+    padding: 0;
+  }
+  & .description {
+    /* maintain newlines */
+    white-space: pre-wrap;
+  }
+  & input {
+    border: none;
+    background-color: #ddd;
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+  & button:hover {
+    background-image: none;
+    color: rgb(200, 100, 100);
+  }
+  & div button:hover {
+    color: #666;
+  }
+}

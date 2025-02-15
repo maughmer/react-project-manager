@@ -1,0 +1,12 @@
+.task {
+  display: flex;
+  background-color: #eee;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  column-gap: 1rem;
+  & span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

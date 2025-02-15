@@ -1,0 +1,44 @@
+.article {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  padding-top: 3rem;
+}
+
+.article section {
+  display: flex;
+  flex-direction: column;
+  & h2 {
+    margin: 0;
+  }
+  & label {
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding-bottom: 0.25rem;
+  }
+  & label.warning {
+    font-weight: normal;
+    color: rgb(200, 100, 100);
+  }
+  & input, textarea {
+    border: none;
+    background-color: #ddd;
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+}
+
+.article section.columns {
+  flex-direction: row;
+  justify-content: space-between;
+  & div {
+    display: flex;
+    &:first-child {
+      flex-direction: column;
+      width: 12rem;
+    }
+    &:last-child {
+      align-self: flex-end;
+    }
+  }
+}
