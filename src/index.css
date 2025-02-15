@@ -73,3 +73,16 @@ li {
 li:hover {
   background-image: linear-gradient(rgb(255 255 255 / 15%) 0 0);
 }
+
+dialog {
+  /* move it up a bit */
+  transform: translateY(-50%);
+  background-color: ghostwhite;
+  & form {
+    text-align: right;
+  }
+  &::backdrop {
+    background-color: black;
+    opacity: 0.50;
+  }
+}
