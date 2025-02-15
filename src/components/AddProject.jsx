@@ -9,14 +9,14 @@ export default function AddProject({ onAdd, onSave }) {
   const [warning, setWarning] = useState();
 
   function handleSaveProject() {
-    if (title.current && description.current && date.current) {
+    if (title.current.value && description.current.value && date.current.value) {
       onSave({title: title.current.value, description: description.current.value, date: date.current.value});
     } else {
       setWarning('Please enter a title, description, and due date.');
     }
   }
 
-  if (warning && title.current && description.current && date.current) {
+  if (warning && title.current.value && description.current.value && date.current.value) {
     setWarning('');
   }
 
