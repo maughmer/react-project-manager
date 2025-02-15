@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 
 import Task from './Task';
 import classes from './Project.module.css';
 
 export default function Project({ project, onUpdate, onDelete }) {
-  const [task, setTask] = useState('');
+  const task = useRef();
   const date = new Date(project.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric'});
 
   function handleDeleteTask(deletedTask) {
@@ -12,11 +12,12 @@ export default function Project({ project, onUpdate, onDelete }) {
     onUpdate(tasks);
   }
 
-  function handleAddTask(event) {
-    if (task.length > 0) {
-      project.tasks.unshift(task);
+  function handleAddTask() {
+    const tsk = task.current?.value;
+    if (tsk && tsk.length > 0) {
+      project.tasks.unshift(tsk);
       onUpdate(project.tasks);
-      setTask('');
+      task.current.value = '';
     }
   }
 
@@ -38,7 +39,7 @@ export default function Project({ project, onUpdate, onDelete }) {
       </section>
       <section>
         <div className={classes.addTask}>
-          <input id="task" type="text" value={task} onChange={event => setTask(event.target.value)} />
+          <input type="text" ref={task} />
           <button type="button" className="pale" onClick={handleAddTask}>Add Task</button>
         </div>
       </section>

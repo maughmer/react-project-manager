@@ -1,22 +1,22 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import classes from './AddProject.module.css';
 
 export default function AddProject({ onAdd, onSave }) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
+  const title = useRef();
+  const description = useRef();
+  const date = useRef();
   const [warning, setWarning] = useState();
 
   function handleSaveProject() {
-    if (title && description && date) {
-      onSave(title, description, date);
+    if (title.current && description.current && date.current) {
+      onSave(title.current.value, description.current.value, date.current.value);
     } else {
       setWarning('Please enter a title, description, and due date.');
     }
   }
 
-  if (warning && title && description && date) {
+  if (warning && title.current && description.current && date.current) {
     setWarning('');
   }
 
@@ -26,17 +26,17 @@ export default function AddProject({ onAdd, onSave }) {
         <h2>New Project</h2>
       </section>
       <section>
-        <label htmlFor="title" className="title">Title</label>
-        <input id="title" type="text" value={title} onChange={event => setTitle(event.target.value)} />
+        <label className="title">Title</label>
+        <input type="text" ref={title} />
       </section>
       <section>
-        <label htmlFor="description" className="title">Description</label>
-        <textarea id="description" rows="3" value={description} onChange={event => setDescription(event.target.value)}></textarea>
+        <label className="title">Description</label>
+        <textarea rows="3" ref={description}></textarea>
       </section>
       <section className={classes.columns}>
         <div>
-          <label htmlFor="date" className="title">Due Date</label>
-          <input id="date" type="date" value={date} onChange={event => setDate(event.target.value)} />
+          <label className="title">Due Date</label>
+          <input type="date" ref={date} />
         </div>
         <div>
           <button type="button" className="pale" onClick={() => onAdd(false)}>Cancel</button>
