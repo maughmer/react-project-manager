@@ -29,5 +29,5 @@ moment, I'm using refs to get data from what few fields there are in the app.
 
 ## Updates
 
-Added a modal dialog for alerts.
-Upated app to use Context instead of passing props all over.
+- Added a modal dialog for alerts.
+- Upated app to use Context instead of passing props all over.
