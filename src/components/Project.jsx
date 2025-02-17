@@ -1,22 +1,25 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 
-import Task from './Task';
+import { ProjectContext } from '../store/projects-context';
 import classes from './Project.module.css';
+import Task from './Task';
 
-export default function Project({ project, onUpdate, onDelete }) {
+export default function Project() {
+  const { currentProject, updateProject, deleteProject } = useContext(ProjectContext);
   const task = useRef();
+  const project = currentProject;
   const date = new Date(project.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric'});
 
   function handleDeleteTask(deletedTask) {
     const tasks = project.tasks.filter(task => task !== deletedTask);
-    onUpdate(tasks);
+    updateProject(tasks);
   }
 
   function handleAddTask() {
     const enteredTask = task.current.value;
     if (enteredTask.length > 0) {
       project.tasks.unshift(enteredTask);
-      onUpdate(project.tasks);
+      updateProject(project.tasks);
       task.current.value = '';
     }
   }
@@ -26,7 +29,7 @@ export default function Project({ project, onUpdate, onDelete }) {
       <section>
         <div className={classes.columns}>
           <h2 className={classes.title}>{project.title}</h2>
-          <button type="button" className="pale" onClick={() => onDelete(project.id)}>Delete Task</button>
+          <button type="button" className="pale" onClick={() => deleteProject(project.id)}>Delete Task</button>
         </div>
         <p className={classes.subtitle}>{date}</p>
         <p className={classes.description}>{project.description}</p>
@@ -47,7 +50,7 @@ export default function Project({ project, onUpdate, onDelete }) {
         {project.tasks.length > 0 && <ul>
           { project.tasks.map(task => <Task title={task} onDelete={handleDeleteTask} key={task} />) }
         </ul>}
-        {project.tasks.length == 0 && <p className={classes.subtitle}>This project does not yet have any tasks.</p>}
+        {project.tasks.length === 0 && <p className={classes.subtitle}>This project does not yet have any tasks.</p>}
       </section>
     </article>
   )

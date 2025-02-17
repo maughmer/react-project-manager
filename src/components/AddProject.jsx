@@ -1,15 +1,16 @@
-import { useRef, useState } from 'react';
+import { useContext, useRef } from 'react';
 
+import { ProjectContext } from '../store/projects-context';
 import classes from './AddProject.module.css';
 import Modal from './Modal';
 
-export default function AddProject({ onAdd, onSave }) {
+export default function AddProject() {
+  const { addProject, saveProject }= useContext(ProjectContext);
   const modal = useRef();
 
   const title = useRef();
   const description = useRef();
   const date = useRef();
-  // const [warning, setWarning] = useState();
 
   function handleSaveProject() {
     const enteredTitle = title.current.value.trim();
@@ -17,9 +18,8 @@ export default function AddProject({ onAdd, onSave }) {
     const enteredDate = date.current.value;
 
     if (enteredTitle && enteredDesc && enteredDate) {
-      onSave({title: enteredTitle, description: enteredDesc, date: enteredDate});
+      saveProject({title: enteredTitle, description: enteredDesc, date: enteredDate});
     } else {
-      // setWarning('Please enter a Title, Description, and Due Date.');
       modal.current.open();
     }
   }
@@ -48,11 +48,10 @@ export default function AddProject({ onAdd, onSave }) {
             <input type="date" ref={date} />
           </div>
           <div>
-            <button type="button" className="pale" onClick={() => onAdd(false)}>Cancel</button>
+            <button type="button" className="pale" onClick={() => addProject(false)}>Cancel</button>
             <button type="button" onClick={handleSaveProject}>Save</button>
           </div>
         </section>
-        {/* {warning && <section><label className={classes.warning}>{warning}</label></section>} */}
       </article>
     </>
   )

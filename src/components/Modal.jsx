@@ -1,5 +1,6 @@
 import { useImperativeHandle, useRef } from "react"
 import { createPortal } from "react-dom";
+
 import './Modal.css';
 
 export default function Modal({ ref, children, buttonName="OK" }) {
@@ -20,6 +21,6 @@ export default function Modal({ ref, children, buttonName="OK" }) {
         <button>{buttonName}</button>
       </form>
     </dialog>,
-    document.getElementById('modal-root') // from index.html
+    document.getElementById('modal-root') // defined in index.html
   );
 }
