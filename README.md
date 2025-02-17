@@ -26,3 +26,8 @@ of Angular apps.
 
 The current version of the app doesn't use forms, as I haven't yet reached that section of the React course. For the
 moment, I'm using refs to get data from what few fields there are in the app.
+
+## Updates
+
+Added a modal dialog for alerts.
+Upated app to use Context instead of passing props all over.
