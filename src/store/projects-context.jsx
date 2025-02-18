@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer } from "react";
 
 export const ProjectContext = createContext({
   projects: {},
@@ -10,40 +10,66 @@ export const ProjectContext = createContext({
   deleteProject: () => {},
 });
 
-export default function ProjectContextProvider({ children }) {
-  const [projects, setProjects] = useState({});
-  const [currentProject, setCurrentProject] = useState(undefined);
+let count = 0;
+const ReducerType = {
+  ADD_PROJECT: count++,
+  SAVE_PROJECT: count++,
+  SELECT_PROJECT: count++,
+  UPDATE_PROJECT: count++,
+  DELETE_PROJECT: count++,
+}
 
-  function handleAddProject(add = true) {
-    setCurrentProject(null);
+function projectsReducer(state, action) {
+  if (action.type === ReducerType.ADD_PROJECT) {
+    return { ...state, currentProject: null };
+  }
+  if (action.type === ReducerType.SAVE_PROJECT) {
+    const newProject = { ...action.projectData, id: Date.now(), tasks: [] };
+    const projects = { ...state.projects, [newProject.id]: newProject };
+    return { ...state, projects, currentProject: newProject };
+  }
+  if (action.type === ReducerType.SELECT_PROJECT) {
+    return { ...state, currentProject: action.project };
+  }
+  if (action.type === ReducerType.UPDATE_PROJECT) {
+    const updatedProject = { ...state.currentProject, tasks: action.tasks };
+    const projects = { ...state.projects, [updatedProject.id]: updatedProject };
+    return { ...state, projects, currentProject: updatedProject };
+  }
+  if (action.type === ReducerType.DELETE_PROJECT) {
+    const updatedProjects = { ...state.projects, [action.id]: null };
+    delete updatedProjects[action.id];
+    return { ...state, projects: updatedProjects, currentProject: undefined };
+  }
+  return state;
+}
+
+export default function ProjectContextProvider({ children }) {
+  const [projectsState, setProjectsState] = useReducer(projectsReducer, { projects: {}, currentProject: undefined });
+
+  function handleAddProject() {
+    setProjectsState({ type: ReducerType.ADD_PROJECT })
   }
   
   function handleSaveProject(projectData) {
-    const newProject = { ...projectData, id: Date.now(), tasks: [] };
-    setProjects(current => ({ ...current, [newProject.id]: newProject }));
-    setCurrentProject(newProject);
+    setProjectsState({ type: ReducerType.SAVE_PROJECT, projectData });
   }
 
   function handleSelectProject(project) {
-    setCurrentProject(project);
+    setProjectsState({ type: ReducerType.SELECT_PROJECT, project });
   }
 
   function handleUpdateProject(tasks) {
-    const updatedProject = { ...currentProject, tasks };
-    setProjects(current => ({ ...current, [updatedProject.id]: updatedProject }));
-    setCurrentProject(updatedProject);
+    setProjectsState({ type: ReducerType.UPDATE_PROJECT, tasks });
   }
 
   function handleDeleteProject(id) {
-    const updatedProjects = { ...projects };
-    delete updatedProjects[id];
-    setProjects(updatedProjects);
-    setCurrentProject(undefined);
+    setProjectsState({ type: ReducerType.DELETE_PROJECT, id });
   }
   
   const ctxValue = {
-    projects,
-    currentProject,
+    projects: projectsState.projects,
+    currentProject: projectsState.currentProject,
     addProject: handleAddProject,
     saveProject: handleSaveProject,
     selectProject: handleSelectProject,
