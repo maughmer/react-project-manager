@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 
 export const ProjectContext = createContext({
-  projects: [],
+  projects: {},
   currentProject: undefined,
   addProject: () => {},
   saveProject: () => {},
@@ -11,7 +11,7 @@ export const ProjectContext = createContext({
 });
 
 export default function ProjectContextProvider({ children }) {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState({});
   const [currentProject, setCurrentProject] = useState(undefined);
 
   function handleAddProject(add = true) {
@@ -20,7 +20,7 @@ export default function ProjectContextProvider({ children }) {
   
   function handleSaveProject(projectData) {
     const newProject = { ...projectData, id: Date.now(), tasks: [] };
-    setProjects(current => [...current, newProject]);
+    setProjects(current => ({ ...current, [newProject.id]: newProject }));
     setCurrentProject(newProject);
   }
 
@@ -29,20 +29,16 @@ export default function ProjectContextProvider({ children }) {
   }
 
   function handleUpdateProject(tasks) {
-    setProjects(current => current.map(proj => {
-      if (proj.id != currentProject.id) {
-        return proj;
-      } else {
-        const project = { ...proj, tasks };
-        setCurrentProject(project);
-        return project;
-      }
-    }));
+    const updatedProject = { ...currentProject, tasks };
+    setProjects(current => ({ ...current, [updatedProject.id]: updatedProject }));
+    setCurrentProject(updatedProject);
   }
 
   function handleDeleteProject(id) {
+    const updatedProjects = { ...projects };
+    delete updatedProjects[id];
+    setProjects(updatedProjects);
     setCurrentProject(undefined);
-    setProjects(current => current.filter(proj => proj.id != id));
   }
   
   const ctxValue = {

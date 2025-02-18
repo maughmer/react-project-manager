@@ -6,6 +6,7 @@ import logo from '../assets/no-projects.png';
 
 export default function Welcome() {
   const { addProject } = useContext(ProjectContext);
+  
   return (
     <article className={classes.article}>
       <img src={logo} width="70" height="72" alt="Clipboard" />

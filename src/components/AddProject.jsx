@@ -6,6 +6,7 @@ import Modal from './Modal';
 
 export default function AddProject() {
   const { addProject, saveProject }= useContext(ProjectContext);
+  
   const modal = useRef();
 
   const title = useRef();
