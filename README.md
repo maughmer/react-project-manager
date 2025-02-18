@@ -31,3 +31,4 @@ moment, I'm using refs to get data from what few fields there are in the app.
 
 - Added a modal dialog for alerts.
 - Upated app to use Context instead of passing props all over.
+- Added a Reducer for the Context Provider. Overkill for a project this size, but I wanted an example of how it's done.
