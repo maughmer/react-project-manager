@@ -6,7 +6,7 @@ import Modal from './Modal';
 
 export default function AddProject() {
   const { addProject, saveProject }= useContext(ProjectContext);
-  
+
   const modal = useRef();
 
   const title = useRef();
@@ -32,27 +32,25 @@ export default function AddProject() {
         <p className={classes.warning}>Please enter a Title, Description, and Due Date.</p>
       </Modal>
       <article className={classes.article}>
-        <section>
-          <h2>New Project</h2>
-        </section>
-        <section>
+        <h2>New Project</h2>
+        <p>
           <label className="title">Title</label>
           <input type="text" ref={title} />
-        </section>
-        <section>
+        </p>
+        <p>
           <label className="title">Description</label>
           <textarea rows="3" ref={description}></textarea>
-        </section>
-        <section className={classes.columns}>
-          <div>
+        </p>
+        <div className={`columns ${classes.dateRow}`}>
+          <p>
             <label className="title">Due Date</label>
             <input type="date" ref={date} />
-          </div>
-          <div>
+          </p>
+          <div className='columns'>
             <button type="button" className="pale" onClick={() => addProject(false)}>Cancel</button>
             <button type="button" onClick={handleSaveProject}>Save</button>
           </div>
-        </section>
+        </div>
       </article>
     </>
   )

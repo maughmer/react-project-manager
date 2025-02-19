@@ -73,3 +73,10 @@ li {
 li:hover, .highlighted {
   background-image: linear-gradient(rgb(255 255 255 / 15%) 0 0);
 }
+
+.columns {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -3,14 +3,15 @@
   flex-direction: column;
   row-gap: 1rem;
   padding-top: 3rem;
-}
-
-.article section {
-  display: flex;
-  flex-direction: column;
   & h2 {
     margin: 0;
   }
+}
+
+.article p {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
   & label {
     font-weight: 600;
     font-size: 0.8rem;
@@ -24,17 +25,8 @@
   }
 }
 
-.article section.columns {
-  flex-direction: row;
-  justify-content: space-between;
-  & div {
-    display: flex;
-    &:first-child {
-      flex-direction: column;
-      width: 12rem;
-    }
-    &:last-child {
-      align-self: flex-end;
-    }
+.dateRow {
+  & p:first-child {
+    width: 12rem;
   }
 }
