@@ -6,7 +6,7 @@ import Task from './Task';
 
 export default function Project() {
   const { currentProject, updateProject, deleteProject } = useContext(ProjectContext);
-  
+
   const task = useRef();
   const project = currentProject;
   const date = new Date(project.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric'});

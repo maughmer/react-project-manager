@@ -22,5 +22,5 @@ export default function Modal({ ref, children, buttonName="OK" }) {
       </form>
     </dialog>,
     document.getElementById('modal-root') // defined in index.html
-  );
+  )
 }
