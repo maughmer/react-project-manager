@@ -52,4 +52,7 @@
   & div button:hover {
     color: #666;
   }
+  & li {
+    /* margin-bottom: 0.25rem; */
+  }
 }

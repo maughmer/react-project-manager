@@ -35,23 +35,19 @@ export default function Project() {
         <p className={classes.subtitle}>{date}</p>
         <p className={classes.description}>{project.description}</p>
       </section>
+      <hr />
       <section>
-        <hr />
-      </section>
-      <section>
-        <h2>Tasks</h2>
-      </section>
-      <section>
+        <h2 style={{margin: 0}}>Tasks</h2>
         <div className={classes.addTask}>
           <input type="text" ref={task} />
           <button type="button" className="pale" onClick={handleAddTask}>Add Task</button>
         </div>
-      </section>
-      <section>
-        {project.tasks.length > 0 && <ul>
-          { project.tasks.map(task => <Task title={task} onDelete={handleDeleteTask} key={task} />) }
-        </ul>}
-        {project.tasks.length === 0 && <p className={classes.subtitle}>This project does not yet have any tasks.</p>}
+        <div>
+          {project.tasks.length > 0 && <ul>
+            { project.tasks.map(task => <Task title={task} onDelete={handleDeleteTask} key={task} />) }
+          </ul>}
+          {project.tasks.length === 0 && <p className={classes.subtitle}>This project does not yet have any tasks.</p>}
+        </div>
       </section>
     </article>
   )

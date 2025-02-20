@@ -4,7 +4,11 @@ export default function Task({ title, onDelete }) {
   return (
     <li className={classes.task}>
       <span>{title}</span>
-      <button className="pale" onClick={() => onDelete(title)}>Complete</button>
+      <p>
+        <button className="pale icon" onMouseDown={() => onDelete(title)}>
+          <span className="material-symbols-outlined">task_alt</span> {/* Complete */}
+        </button>
+      </p>
     </li>
   )
 }

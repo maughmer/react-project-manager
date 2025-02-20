@@ -48,6 +48,9 @@ button.pale {
   color: black;
   background-color: transparent;
 }
+button.pale.icon {
+  padding: 0.25rem 0.6rem;
+}
 
 button:hover {
   background-image: linear-gradient(rgb(255 255 255 / 25%) 0 0);
